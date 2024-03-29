@@ -1,1 +1,31 @@
-<p>login works!</p>
+<div class="container">
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-6 offset-lg-3 offset-lg-3">
+            <div class="card text-center" style="padding: 20px;">
+                <h3>Iniciar sesión</h3>
+                <br>
+                <form [formGroup]="login" (ngSubmit)="log()">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Usuario" formControlName="user">
+                        <span class="text-danger ml-2" *ngIf="login.get('user')?.hasError('required') && login.get('user')?.touched">
+                            El usuario <strong>es requerido.</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
+                        <span class="text-danger ml-2" *ngIf="login.get('password')?.hasError('required') && login.get('password')?.touched">
+                            La contraseña <strong>es requerida</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary mr-2 btn-lg btn-login" [disabled]="login.invalid" type="submit">Aceptar</button>
+                        <button class="btn btn-secondary btn-lg" routerLink="/welcome">Cancelar</button>
+                    </div>
+                    <div class="form-group">
+                        <a style="color: #F05F44; cursor: pointer;" routerLink="/register">Crear cuenta</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
