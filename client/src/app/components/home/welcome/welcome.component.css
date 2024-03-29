@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    color: white;
+}
+
+hr {
+    border-width: 4px;
+    max-width: 65px;
+    border-color: #F05F44;
+}
+
+.btn-lg {
+    background-color: #F05F44;
+    border-color: #F05F44;
+    margin: 10px;
+}
+
+.btn-lg:hover {
+    background-color: #EE4B08;
+    border-radius: #EE4B08;
+}
