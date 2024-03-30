@@ -23,12 +23,12 @@
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Confirmar contraseña" formControlName="confirmPassword">
                         <span class="text-danger ml-2" *ngIf="register.hasError('notSame')">
-                            Contraseñas <strong>no coinciden.</strong>
+                            Las contraseñas <strong>no coinciden.</strong>
                         </span>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary mr-2 btn-reg" type="submit">Aceptar</button>
-                        <button class="btn btn-secondary" routerLink="/login">Cancelar</button>                         
+                        <button class="btn btn-secondary" routerLink="/home/login">Cancelar</button>                         
                     </div>
                 </form>
             </div>

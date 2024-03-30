@@ -14,6 +14,10 @@ import { ChangePasswordComponent } from './components/dashboard/change-password/
 import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { QuestionnairesComponent } from './components/dashboard/questionnaires/questionnaires.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { LoadingComponent } from './shared/loading/loading.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,12 +28,15 @@ import { QuestionnairesComponent } from './components/dashboard/questionnaires/q
     DashboardComponent,
     ChangePasswordComponent,
     NavbarComponent,
-    QuestionnairesComponent
+    QuestionnairesComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     provideClientHydration()

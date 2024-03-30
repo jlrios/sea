@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from  '../../../models/user';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,11 @@ import { User } from  '../../../models/user';
 })
 export class LoginComponent {
   login: FormGroup;
+  loading = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+              private toastr: ToastrService,
+              private router: Router) {
     this.login = this.fb.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
@@ -25,6 +30,17 @@ export class LoginComponent {
       password: this.login.value.password
     }
 
-    console.log(user);
+    this.loading = true;
+    setTimeout(()=> {
+      if (user.name === "JLRD" && user.password == "admin123") {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.toastr.error("Usuario y/o contraseña incorrecto(s)");
+      }
+      this.loading = false;
+    }, 3000);
+
+    
+    this.login.reset();
   }
 }
