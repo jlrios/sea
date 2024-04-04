@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent {
   register: FormGroup;
   
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder, private userService: UserService) {
     this.register = this.fb.group({
       user: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -21,6 +23,15 @@ export class RegisterComponent {
 
   userSignUp(): void {
     console.log(this.register);
+
+    const user: User = {
+      name: this.register.value.user,
+      password: this.register.value.password
+    }
+
+    this.userService.saveUser(user).subscribe(data => {
+      console.log(data);
+    });    
   }
 
   checkPassword(group: FormGroup): any {

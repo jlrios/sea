@@ -17,6 +17,7 @@ import { QuestionnairesComponent } from './components/dashboard/questionnaires/q
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoadingComponent } from './shared/loading/loading.component';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
