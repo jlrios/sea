@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +14,14 @@ import { UserService } from '../../../services/user.service';
 
 export class RegisterComponent {
   register: FormGroup;
-  
-  constructor(private fb:FormBuilder, private userService: UserService) {
+  loading = false;
+
+  constructor(
+      private fb:FormBuilder, 
+      private userService: UserService,
+      private router: Router,
+      private toastr: ToastrService
+    ) {
     this.register = this.fb.group({
       user: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -28,9 +37,17 @@ export class RegisterComponent {
       name: this.register.value.user,
       password: this.register.value.password
     }
-
+    
+    this.loading = true;
     this.userService.saveUser(user).subscribe(data => {
       console.log(data);
+      this.toastr.success('Usuario ' + user.name + ' fue registrado exitosamente', 'Registro de usuario');
+      this.router.navigate(['/home/login']);
+    this.loading = false;
+    }, error => {
+      this.loading = false;
+      this.toastr.error(error.error.message, 'Registro de usuario');
+      this.register.reset();
     });    
   }
 

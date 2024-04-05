@@ -3,8 +3,8 @@
         <div class="col-lg-6 offset-lg-3 offset-lg-3">
             <div class="card text-center" style="padding: 20px;">
                 <h3>Registrarse</h3>
-                <br>
-                <form [formGroup]="register" (ngSubmit)="userSignUp()">
+                <app-loading *ngIf="loading"></app-loading>
+                <form [formGroup]="register" (ngSubmit)="userSignUp()" style="padding-top: 10px;">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Usuario" formControlName="user">
                         <span class="text-danger ml-2" *ngIf="register.get('user')?.hasError('required') && register.get('user')?.touched">
