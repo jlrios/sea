@@ -17,7 +17,13 @@ import { QuestionnairesComponent } from './components/dashboard/questionnaires/q
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoadingComponent } from './shared/loading/loading.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { AddTokenInterceptor } from '../app/helpers/add-token.interceptor';
+import { NewQuestionnaireComponent } from './components/dashboard/questionnaires/new-questionnaire/new-questionnaire.component';
+import { StepOneComponent } from './components/dashboard/questionnaires/new-questionnaire/step-one/step-one.component';
+import { StepTwoComponent } from './components/dashboard/questionnaires/new-questionnaire/step-two/step-two.component';
+import { NewQuestionComponent } from './components/dashboard/questionnaires/new-questionnaire/step-two/new-question/new-question.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,11 @@ import { HttpClientModule } from '@angular/common/http';
     ChangePasswordComponent,
     NavbarComponent,
     QuestionnairesComponent,
-    LoadingComponent
+    LoadingComponent,
+    NewQuestionnaireComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    NewQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,9 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(), // ToastrModule added
     HttpClientModule
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [provideClientHydration(), { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

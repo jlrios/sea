@@ -11,11 +11,11 @@ export class QuestionnairesComponent {
   userName: string;
 
    constructor(private loginService: LoginService) {
-    this.userName = '';
+    this.userName = ' ';
     this.getUserName();
   }
 
   getUserName(): void {
-    this.userName = this.loginService.getUserName()
+    this.userName = this.loginService.getTokenDecoded().sub
   }
 }

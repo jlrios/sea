@@ -17,9 +17,13 @@ export class UserService {
     this.SEAUrlApi = '/api/User';
   }
 
-  // POST
+  // -- POST --
   // http://localhost:29259/api/User
   saveUser(user: User): Observable<any> {
     return this.http.post(this.SEAUrlApp + this.SEAUrlApi, user);
+  }
+
+  changePassword(changePassword: any): Observable<any> {
+    return this.http.put(this.SEAUrlApp + this.SEAUrlApi + '/ChangePassword', changePassword);
   }
 }

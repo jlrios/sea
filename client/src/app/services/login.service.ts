@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'; 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { User } from '../models/user';
 export class LoginService {
   SEAUrlApp: string;
   SEAUrlApi: string;
-
+ 
   constructor(private http: HttpClient) {
     this.SEAUrlApp = environment.endpoint;
     this.SEAUrlApi = '/api/Login';  
@@ -22,14 +23,20 @@ export class LoginService {
   }
 
   setLocalStorage(data: string): void {
-    localStorage.setItem('userName', data);
+    localStorage.setItem('token', data);
   }
 
-  getUserName(): string {
-    return JSON.parse(localStorage.getItem('userName') || '{}');
+  /*getUserName(): string {
+    return localStorage.getItem('userName')!;
+  }*/
+
+  getTokenDecoded(): any {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.getItem('token')!);
+    return decodedToken;
   }
 
   removeLocalStorage(): void {
-    localStorage.removeItem('userName');
+    localStorage.removeItem('token');
   }
 }
